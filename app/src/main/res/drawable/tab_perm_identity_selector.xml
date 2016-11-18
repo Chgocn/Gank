@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/ic_perm_identity_primary_48px"/>
+    <item android:drawable="@drawable/ic_perm_identity_gray_48px" />
+</selector>

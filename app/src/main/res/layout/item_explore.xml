@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_xs"
+    android:layout_marginTop="@dimen/margin_xs">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_xs">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/title"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_l" />
+
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/title"
+            android:textSize="@dimen/text_size_s"
+            android:layout_marginRight="@dimen/margin_xs"
+            android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/title"
+            android:textSize="@dimen/text_size_s"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/who"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

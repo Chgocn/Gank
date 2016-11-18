@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_color"
+    android:padding="@dimen/padding_s"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_marginLeft="@dimen/margin_s"
+            android:textSize="@dimen/text_size_xs"
+            android:textColor="@color/btn_blue_normal"
+            tools:text="作者: chgocn" />
+
+        <TextView
+            android:id="@+id/createdAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_marginLeft="@dimen/margin_s"
+            android:layout_alignBottom="@+id/avatar"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:textSize="@dimen/text_size_xs"
+            tools:text="创建时间: 2016-09-22T21:57:03.924Z" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/text_size_xs"
+            android:text="category"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/middle_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/desc"
+        android:layout_marginTop="@dimen/margin_xl"
+        tools:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_border"
+        android:padding="1dp"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/article_thumbnail"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="一行代码完成。。。。。。。。。" />
+    </LinearLayout>
+</LinearLayout>

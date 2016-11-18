@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/tasksContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/win_bg"/>
+
+        <LinearLayout
+            android:id="@+id/noData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/noDataIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/noDataMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_xl"
+                android:text="空的" />
+
+            <TextView
+                android:id="@+id/noDataAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/ic_launcher"
+                android:gravity="center"
+                android:text="没有空的" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
+
