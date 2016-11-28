@@ -32,6 +32,16 @@ public class HomeFragment extends TabPagerFragment<HomePagerAdapter> implements 
     }
 
     @Override
+    protected void initView(@Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public Presenter getPresenter() {
         return mPresenter;
     }

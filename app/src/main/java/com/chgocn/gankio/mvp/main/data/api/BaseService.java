@@ -3,7 +3,6 @@ package com.chgocn.gankio.mvp.main.data.api;
 import android.util.Log;
 
 import com.chgocn.gankio.mvp.main.domain.ResponseJson;
-import com.chgocn.gankio.mvp.main.domain.ResponseResult;
 import com.chgocn.gankio.mvp.util.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -91,23 +90,6 @@ public class BaseService {
             return buffer.readUtf8();
         } catch (final IOException e) {
             return "did not work";
-        }
-    }
-
-    public class ResponseResultFunc<T> implements Func1<ResponseResult<T>,T> {
-
-        @Override
-        public T call(ResponseResult<T> data) {
-            Log.e(TAG,data.toString());
-//            if (data.getRet() != 200) {
-//                throw new HttpApiException(data.getRet(),data.getMsg());
-//            }
-
-            if (!data.getCode().equals("0")) {
-                throw new KsApiException(data.getCode(),data.getMsg());
-            }
-
-            return data.getInfo();
         }
     }
 

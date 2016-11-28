@@ -61,15 +61,10 @@ public class MainActivity extends TabPagerActivity<MainFragmentAdapter> implemen
         currentPosition = position;
         switch (position) {
             case 0:
-                //setTitle(getResources().getString(R.string.home));
                 break;
             case 1:
-
-                //showRunFragment();
                 break;
             case 2:
-
-                //setTitle(getResources().getString(R.string.perm_identity));
                 break;
             default:
                 break;

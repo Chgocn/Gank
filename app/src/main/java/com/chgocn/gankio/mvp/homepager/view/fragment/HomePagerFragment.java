@@ -5,11 +5,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chgocn.gankio.mvp.PhotoGestureActivity;
 import com.chgocn.gankio.mvp.R;
+import com.chgocn.gankio.mvp.WebActivity;
 import com.chgocn.gankio.mvp.homepager.inject.DaggerHomePagerComponent;
 import com.chgocn.gankio.mvp.homepager.inject.HomePagerModule;
-import com.chgocn.gankio.mvp.homepager.view.adapter.HomePagerListAdapter;
+import com.chgocn.gankio.mvp.homepager.view.adapter.HomePagerRecyclerAdapter;
 import com.chgocn.gankio.mvp.homepager.view.presenter.HomePagerPresenter;
 import com.chgocn.gankio.mvp.main.domain.Gank;
 import com.chgocn.lib.fragment.BaseFragment;
@@ -25,7 +31,9 @@ import butterknife.BindView;
 /**
  * Created by chgocn.
  */
-public class HomePagerFragment extends BaseFragment implements HomePagerPresenter.View, SwipeRefreshLayout.OnRefreshListener {
+public class HomePagerFragment extends BaseFragment implements HomePagerPresenter.View{
+
+    private static final String TAG = "HomePagerFragment";
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
@@ -36,9 +44,9 @@ public class HomePagerFragment extends BaseFragment implements HomePagerPresente
     @Inject
     HomePagerPresenter mPresenter;
 
-    HomePagerListAdapter adapter;
+    HomePagerRecyclerAdapter adapter;
 
-    private List<Gank> gankList;
+    private List<Gank> gankList = new ArrayList<>();
 
     private String category;
 
@@ -62,18 +70,21 @@ public class HomePagerFragment extends BaseFragment implements HomePagerPresente
     }
 
     @Override
-    protected int getFragmentLayout() {
+    protected int getContentView() {
         return R.layout.fragment_homepager;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        gankList = new ArrayList<>();
-        adapter = new HomePagerListAdapter(getActivity(), gankList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+    protected void initView(@Nullable Bundle savedInstanceState) {
+        adapter = new HomePagerRecyclerAdapter(R.layout.item_home_pager, gankList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setAdapter(adapter);
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                mPresenter.pullToLoadMore(category);
+            }
+        });
         refreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -81,8 +92,24 @@ public class HomePagerFragment extends BaseFragment implements HomePagerPresente
             }
         });
         //
-        refreshLayout.setOnRefreshListener(this);
-        onRefresh();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.pullToRefresh(category);
+            }
+        });
+        recyclerView.addOnItemTouchListener(new OnItemClickListener() {
+
+            @Override
+            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                mPresenter.performOnListItemClick(adapter.getData().get(i));
+            }
+        });
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+        mPresenter.pullToRefresh(category);
     }
 
     @Override
@@ -91,22 +118,27 @@ public class HomePagerFragment extends BaseFragment implements HomePagerPresente
     }
 
     @Override
-    public void showList() {
-
+    public void showMoreList(List<Gank> moreGankList) {
+        adapter.addData(moreGankList);
+        adapter.loadMoreComplete();
     }
 
     @Override
-    public void replaceList(List<Gank> gankList) {
-        adapter.replaceList(gankList);
+    public void replaceList(List<Gank> newGankList) {
+        adapter.setNewData(newGankList);
     }
 
     @Override
     public void hideProgress() {
+        Log.e(TAG,"hideProgress()");
         refreshLayout.setRefreshing(false);
     }
 
     @Override
-    public void onRefresh() {
-        mPresenter.fetchData(category, 1);
+    public void onListItemClick(Gank gank) {
+        boolean isWelf = gank.getType().equals("福利");
+
+        startActivity(isWelf ? PhotoGestureActivity.createIntent().putExtra("gank",gank) : WebActivity.createIntent().putExtra("gank",gank));
     }
+
 }

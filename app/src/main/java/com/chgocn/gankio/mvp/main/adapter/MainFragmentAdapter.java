@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.chgocn.gankio.mvp.R;
 import com.chgocn.gankio.mvp.explore.view.fragment.ExploreFragment;
 import com.chgocn.gankio.mvp.home.view.fragment.HomeFragment;
+import com.chgocn.gankio.mvp.personal.view.fragment.PersonalFragment;
 import com.chgocn.lib.adapter.FragmentPagerAdapter;
 
 /**
@@ -19,7 +20,7 @@ public class MainFragmentAdapter extends FragmentPagerAdapter{
 
     private final Resources resources;
 
-    private Class[] fragmentArray = new Class[]{HomeFragment.class, ExploreFragment.class, Fragment.class};
+    private Class[] fragmentArray = new Class[]{HomeFragment.class, ExploreFragment.class, PersonalFragment.class};
     private int[] titleArray = new int[]{R.string.home, R.string.explore, R.string.perm_identity};
 
     /**

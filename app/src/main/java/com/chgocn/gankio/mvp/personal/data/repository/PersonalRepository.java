@@ -2,8 +2,6 @@ package com.chgocn.gankio.mvp.personal.data.repository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-
 /**
  * Created by chgocn.
  */

@@ -1,6 +1,9 @@
 package com.chgocn.gankio.mvp.explore.view.presenter;
 
 
+import android.content.Context;
+
+import com.chgocn.gankio.mvp.WebActivity;
 import com.chgocn.gankio.mvp.explore.data.repository.ExploreRepository;
 import com.chgocn.gankio.mvp.main.domain.Gank;
 import com.chgocn.gankio.mvp.main.domain.UseCase;
@@ -25,6 +28,9 @@ public class ExplorePresenter extends PresenterImpl<ExplorePresenter.View> {
     private View mView;
 
     @Inject
+    Context context;
+
+    @Inject
     public ExplorePresenter() {
 
     }
@@ -38,11 +44,12 @@ public class ExplorePresenter extends PresenterImpl<ExplorePresenter.View> {
     public interface View {
         //TODO: Create methods to implements in Activity or Fragment
         void hideProgress();
+
         void replaceList(List<Gank> gankList);
     }
 
-    public void fetchData(){
-        new UseCase<List<Gank>>(){
+    public void fetchData() {
+        new UseCase<List<Gank>>() {
             @Override
             public Observable buildUseCase() {
                 return repository.getRandomGank();
@@ -62,6 +69,8 @@ public class ExplorePresenter extends PresenterImpl<ExplorePresenter.View> {
         });
     }
 
-
+    public void performOnListItemClick(Gank gank) {
+        context.startActivity(WebActivity.createIntent().putExtra("gank",gank));
+    }
 
 }

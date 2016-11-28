@@ -4,8 +4,6 @@ import com.chgocn.gankio.mvp.personal.data.api.PersonalService;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-
 /**
  * Created by chgocn.
  */

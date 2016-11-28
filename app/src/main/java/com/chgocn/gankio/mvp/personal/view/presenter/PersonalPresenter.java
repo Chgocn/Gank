@@ -1,8 +1,9 @@
 package com.chgocn.gankio.mvp.personal.view.presenter;
 
-import javax.inject.Inject;
 
-import com.chgocn.gankio.mvp.main.view.presenter.PresenterImpl;
+import com.chgocn.lib.presenter.PresenterImpl;
+
+import javax.inject.Inject;
 
 /**
  * Created by chgocn.

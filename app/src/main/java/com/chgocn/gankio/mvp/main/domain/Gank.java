@@ -1,12 +1,15 @@
 package com.chgocn.gankio.mvp.main.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by chgocn.
  */
 
-public class Gank {
+public class Gank implements Parcelable {
     private String _id;
     private String createdAt;
     private String desc;
@@ -97,4 +100,51 @@ public class Gank {
     public void setWho(String who) {
         this.who = who;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.desc);
+        dest.writeStringList(this.images);
+        dest.writeString(this.publishedAt);
+        dest.writeString(this.source);
+        dest.writeString(this.type);
+        dest.writeString(this.url);
+        dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+        dest.writeString(this.who);
+    }
+
+    public Gank() {
+    }
+
+    protected Gank(Parcel in) {
+        this._id = in.readString();
+        this.createdAt = in.readString();
+        this.desc = in.readString();
+        this.images = in.createStringArrayList();
+        this.publishedAt = in.readString();
+        this.source = in.readString();
+        this.type = in.readString();
+        this.url = in.readString();
+        this.used = in.readByte() != 0;
+        this.who = in.readString();
+    }
+
+    public static final Parcelable.Creator<Gank> CREATOR = new Parcelable.Creator<Gank>() {
+        @Override
+        public Gank createFromParcel(Parcel source) {
+            return new Gank(source);
+        }
+
+        @Override
+        public Gank[] newArray(int size) {
+            return new Gank[size];
+        }
+    };
 }

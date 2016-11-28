@@ -29,6 +29,8 @@ import rx.subjects.BehaviorSubject;
  */
 public abstract class BaseFragment extends Fragment implements LifecycleProvider<FragmentEvent> {
 
+    protected Activity activity;
+
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
 
     public void initPresenter() {
@@ -57,8 +59,9 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = getActivity();
         lifecycleSubject.onNext(FragmentEvent.ATTACH);
     }
 
@@ -71,13 +74,15 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getFragmentLayout(), container, false);
+        View view = inflater.inflate(getContentView(), container, false);
+        ButterKnife.bind(this, view);
+        initView(savedInstanceState);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
     }
 
     @Override
@@ -85,6 +90,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         super.onActivityCreated(savedInstanceState);
         initPresenter();
         lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
+        initData(savedInstanceState);
     }
 
     @Override
@@ -146,7 +152,11 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
 
     public abstract void initInjector();
 
-    protected abstract int getFragmentLayout();
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
+
+    protected abstract void initData(Bundle savedInstanceState);
+
+    protected abstract int getContentView();
 
     public abstract Presenter getPresenter();
 

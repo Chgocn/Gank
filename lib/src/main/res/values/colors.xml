@@ -71,6 +71,7 @@
     <color name="whitesmoke">#ffffff</color>
 
     <color name="text_light">#AEAEAE</color>
+    <color name="text_color_title">#000000</color>
 
 
 </resources>

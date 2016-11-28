@@ -1,5 +1,7 @@
 package com.chgocn.gankio.mvp.homepager.view.presenter;
 
+import android.util.Log;
+
 import com.chgocn.gankio.mvp.homepager.data.repository.HomePagerRepository;
 import com.chgocn.gankio.mvp.main.domain.Gank;
 import com.chgocn.gankio.mvp.main.domain.UseCase;
@@ -27,6 +29,8 @@ public class HomePagerPresenter extends PresenterImpl<HomePagerPresenter.View> {
 
     private View mView;
 
+    private int requestPage = 1;
+
     @Inject
     public HomePagerPresenter() {
     }
@@ -39,14 +43,21 @@ public class HomePagerPresenter extends PresenterImpl<HomePagerPresenter.View> {
 
     public interface View {
         //TODO: Create methods to implements in Activity or Fragment
-        void showList();
+        void showMoreList(List<Gank> moreGankList);
 
-        void replaceList(List<Gank> gankList);
+        void replaceList(List<Gank> newGankList);
 
         void hideProgress();
+
+        void onListItemClick(Gank gank);
+
     }
 
-    public void fetchData(String category, int requestPage){
+    public void performOnListItemClick(Gank gank) {
+        mView.onListItemClick(gank);
+    }
+
+    private void fetchData(String category, int requestPage){
         new UseCase<List<Gank>>(){
             @Override
             public Observable buildUseCase() {
@@ -54,17 +65,33 @@ public class HomePagerPresenter extends PresenterImpl<HomePagerPresenter.View> {
             }
         }.execute(new Action1<List<Gank>>() {
             @Override
-            public void call(List<Gank> ganks) {
-                mView.hideProgress();
-                mView.replaceList(ganks);
+            public void call(List<Gank> gankList) {
+                if (requestPage == 1) {
+                    mView.hideProgress();
+                    mView.replaceList(gankList);
+                } else {
+                    mView.showMoreList(gankList);
+                }
             }
         }, new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
+                mView.hideProgress();
                 throwable.printStackTrace();
-                //Log.e(TAG,throwable.getMessage());
             }
         });
+    }
+
+    public void pullToRefresh(String category) {
+        Log.e(TAG,"pullToRefresh()");
+        requestPage = 1;
+        fetchData(category,requestPage);
+    }
+
+    public void pullToLoadMore(String category) {
+        Log.e(TAG,"pullToLoadMore()");
+        requestPage++;
+        fetchData(category,requestPage);
     }
 
 }

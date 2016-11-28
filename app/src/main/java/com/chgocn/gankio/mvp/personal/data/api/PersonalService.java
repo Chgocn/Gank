@@ -4,10 +4,6 @@ import com.chgocn.gankio.mvp.main.data.api.BaseService;
 
 import javax.inject.Inject;
 
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import rx.Observable;
-
 /**
  * Created by chgocn.
  */

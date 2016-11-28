@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/padding_xs"
-    android:layout_marginTop="@dimen/margin_xs">
+    style="@style/ListItem">
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,29 +17,24 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/title"
-            android:maxLines="1"
-            android:textSize="@dimen/text_size_l" />
+            style="@style/ListTitleText"
+            tools:text="@string/title" />
 
         <TextView
             android:id="@+id/who"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@string/title"
-            android:textSize="@dimen/text_size_s"
+            style="@style/ListSubtitleText"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/margin_xs"
             android:layout_marginRight="@dimen/margin_xs"
-            android:layout_alignParentBottom="true"/>
+            tools:text="@string/title" />
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/title"
-            android:textSize="@dimen/text_size_s"
+            style="@style/ListSubtitleText"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/who"/>
+            android:layout_toEndOf="@+id/who"
+            android:layout_toRightOf="@+id/who"
+            tools:text="@string/title" />
 
     </RelativeLayout>
 

@@ -27,7 +27,7 @@ public class HomePagerService extends BaseService {
     // TODO: Create methods to conect with API
 
     public Observable<List<Gank>> getGanks(String category, int requestPage) {
-        return mService.getGanks(category,20,requestPage).map(new ResponseFunc<>());
+        return mService.getGanks(category,10,requestPage).map(new ResponseFunc<>());
     }
 
     private interface Service {
