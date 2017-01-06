@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.chgocn.gankio.mvp.main.domain.Gank;
+import com.chgocn.gankio.mvp.domain.Gank;
 import com.chgocn.gankio.mvp.util.Intents;
 import com.chgocn.lib.activity.BaseActivity;
 import com.chgocn.lib.presenter.Presenter;

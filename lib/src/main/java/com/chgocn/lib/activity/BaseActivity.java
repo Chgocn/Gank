@@ -1,12 +1,20 @@
 package com.chgocn.lib.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.chgocn.lib.R;
 import com.chgocn.lib.presenter.Presenter;
+import com.chgocn.lib.util.SystemBarTintManager;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
@@ -17,7 +25,6 @@ import javax.annotation.Nonnull;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
-import com.chgocn.lib.R;
 
 
 /**
@@ -25,7 +32,17 @@ import com.chgocn.lib.R;
  */
 public abstract class BaseActivity extends AppCompatActivity implements LifecycleProvider<ActivityEvent> {
 
+    private static final String TAG = "BaseActivity";
+
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+    private boolean showHomeAsUp = true;
+
+    protected Toolbar toolbar;
+    protected TextView toolbarTitle;
+    protected ImageView toolbarImage;
+    private int primaryColor;
+    private int primaryDarkColor;
+    private boolean statusBarTranslucent;
 
     public void initPresenter() {
         initInjector();
@@ -42,9 +59,76 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
+        Log.d(TAG, getClass().getSimpleName() + ".onCreate...");
         ButterKnife.bind(this);
+//        Resources.Theme theme = this.getTheme();
+//        TypedValue typedValue = new TypedValue();
+//        // get primary color
+//        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+//        primaryColor = typedValue.data;
+//        theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+//        primaryDarkColor = typedValue.data;
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            TypedArray windowTranslucentAttribute = theme.obtainStyledAttributes(new int[]{android.R.attr.windowTranslucentStatus});
+//            statusBarTranslucent = windowTranslucentAttribute.getBoolean(0, false);
+//        }
+        initActionBar(isShowHomeAsUp());
         initPresenter();
         lifecycleSubject.onNext(ActivityEvent.CREATE);
+    }
+
+    /**
+     * initActionBar
+     */
+    protected final void initActionBar(boolean showHomeAsUp) {
+        // set Toolbar as actionbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (null != toolbar) {
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            if (null != actionBar) {
+                actionBar.setDisplayHomeAsUpEnabled(showHomeAsUp);
+            }
+            toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        }
+
+        // Apply background tinting to the Android system UI when using KitKat translucent modes.
+        // see {https://github.com/jgilfelt/SystemBarTint}
+//        if (isTranslucentStatusBar() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            setStatusBarTint(darkenColor(primaryColor));
+//        }
+    }
+
+    /**
+     * darken color
+     */
+    protected int darkenColor(int color) {
+        if (color == primaryColor) {
+            return primaryDarkColor;
+        } else {
+            float[] hsv = new float[3];
+            Color.colorToHSV(color, hsv);
+            hsv[2] *= 0.8f; // value component
+            return Color.HSVToColor(hsv);
+        }
+    }
+
+    /**
+     * set the statusBar tint
+     */
+    protected void setStatusBarTint(int primaryDarkColor) {
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintColor(primaryDarkColor);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        if (toolbarTitle != null) {
+            toolbarTitle.setText(title);
+        } else {
+            super.setTitle(title);
+        }
     }
 
     @Override
@@ -100,6 +184,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
 
     @Override
     protected void onDestroy() {
+        Log.d(TAG, getClass().getSimpleName() + ".onDestroy...");
         lifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
 
@@ -201,5 +286,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean isShowHomeAsUp() {
+        return showHomeAsUp;
+    }
+
+    public boolean isTranslucentStatusBar() {
+        return statusBarTranslucent;
     }
 }

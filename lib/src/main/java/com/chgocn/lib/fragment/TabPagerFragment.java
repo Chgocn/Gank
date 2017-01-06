@@ -121,7 +121,7 @@ public abstract class TabPagerFragment<V extends PagerAdapter & FragmentProvider
      * @return layout resource id
      */
     protected int getContentView() {
-        return R.layout.pager_with_tabs1;
+        return R.layout.fragment_pager_with_tabs;
     }
 
     private void createPager() {

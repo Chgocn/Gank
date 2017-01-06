@@ -2,9 +2,11 @@ package com.chgocn.gankio.mvp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.webkit.WebSettings;
 
-import com.chgocn.gankio.mvp.main.domain.Gank;
+import com.chgocn.gankio.mvp.domain.Gank;
 import com.chgocn.gankio.mvp.util.Intents;
 import com.chgocn.gankio.mvp.view.ProgressWebView;
 import com.chgocn.lib.activity.BaseActivity;
@@ -20,6 +22,9 @@ public class WebActivity extends BaseActivity{
 
     @BindView(R.id.web_content)
     ProgressWebView webView;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     public void initInjector() {
@@ -38,6 +43,8 @@ public class WebActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setSupportActionBar(toolbar);
         Gank gank = getIntent().getParcelableExtra("gank");
         boolean isWelf = gank.getType().equals("福利");
         WebSettings settings = webView.getSettings();
@@ -55,5 +62,11 @@ public class WebActivity extends BaseActivity{
     @Override
     public Presenter getPresenter() {
         return null;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
