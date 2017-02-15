@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.chgocn.lib.view.BannerPager xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bannerPager"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    app:delay_time="5000"
+    app:scroll_time="1000"
+    android:layerType="software"
+    tools:showIn="@layout/fragment_personal">
+
+</com.chgocn.lib.view.BannerPager>

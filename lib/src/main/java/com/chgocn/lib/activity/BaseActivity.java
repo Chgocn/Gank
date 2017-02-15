@@ -151,7 +151,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     @Override
     protected void onResume() {
         super.onResume();
-
+        Log.d(TAG, getClass().getSimpleName() + ".onResume...");
         Presenter presenter = getPresenter();
         if (presenter != null) {
             presenter.resume();
@@ -163,7 +163,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     protected void onPause() {
         lifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
-
+        Log.d(TAG, getClass().getSimpleName() + ".onPause...");
         Presenter presenter = getPresenter();
         if (presenter != null) {
             presenter.pause();
@@ -174,12 +174,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
     protected void onStart() {
         super.onStart();
         lifecycleSubject.onNext(ActivityEvent.START);
+        Log.d(TAG, getClass().getSimpleName() + ".onStart...");
     }
 
     @Override
     protected void onStop() {
         lifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
+        Log.d(TAG, getClass().getSimpleName() + ".onStop...");
     }
 
     @Override

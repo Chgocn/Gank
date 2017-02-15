@@ -5,10 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chgocn.gankio.mvp.ApplicationModule;
 import com.chgocn.gankio.mvp.R;
 import com.chgocn.gankio.mvp.domain.Gank;
@@ -52,15 +49,16 @@ public class ExploreFragment extends DialogFragment implements ExplorePresenter.
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        adapter = new ExploreRecyclerAdapter(R.layout.item_explore, gankList);
+        adapter = new ExploreRecyclerAdapter(getActivity(), gankList);
         list.setLayoutManager(new LinearLayoutManager(activity));
         list.setAdapter(adapter);
-        list.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                mPresenter.performOnListItemClick(adapter.getData().get(i));
-            }
-        });
+
+//        list.addOnItemTouchListener(new OnItemClickListener() {
+//            @Override
+//            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+//                mPresenter.performOnListItemClick(adapter.getItem(i));
+//            }
+//        });
         refreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -93,6 +91,6 @@ public class ExploreFragment extends DialogFragment implements ExplorePresenter.
 
     @Override
     public void replaceList(List<Gank> gankList) {
-        adapter.setNewData(gankList);
+        adapter.setItems(gankList);
     }
 }

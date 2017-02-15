@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import rx.subjects.BehaviorSubject;
  */
 public abstract class BaseFragment extends Fragment implements LifecycleProvider<FragmentEvent> {
 
+    private static final String TAG = "BaseFragment";
     protected Activity activity;
 
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
@@ -63,12 +65,14 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         super.onAttach(context);
         this.activity = getActivity();
         lifecycleSubject.onNext(FragmentEvent.ATTACH);
+        Log.d(TAG, getClass().getSimpleName() + ".onAttach...");
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(FragmentEvent.CREATE);
+        Log.d(TAG, getClass().getSimpleName() + ".onCreate...");
     }
 
     @Nullable
@@ -102,7 +106,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @Override
     public void onResume() {
         super.onResume();
-
+        Log.d(TAG, getClass().getSimpleName() + ".onResume...");
         Presenter presenter = getPresenter();
         if (presenter != null) {
             presenter.resume();
@@ -114,7 +118,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public void onPause() {
         lifecycleSubject.onNext(FragmentEvent.PAUSE);
         super.onPause();
-
+        Log.d(TAG, getClass().getSimpleName() + ".onPause...");
         Presenter presenter = getPresenter();
         if (presenter != null) {
             presenter.pause();
@@ -125,6 +129,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public void onStop() {
         lifecycleSubject.onNext(FragmentEvent.STOP);
         super.onStop();
+        Log.d(TAG, getClass().getSimpleName() + ".onStop...");
     }
 
     @Override
@@ -137,7 +142,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public void onDestroy() {
         lifecycleSubject.onNext(FragmentEvent.DESTROY);
         super.onDestroy();
-
+        Log.d(TAG, getClass().getSimpleName() + ".onDestroy...");
         Presenter presenter = getPresenter();
         if (presenter != null) {
             presenter.destroy();
@@ -148,6 +153,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public void onDetach() {
         lifecycleSubject.onNext(FragmentEvent.DETACH);
         super.onDetach();
+        Log.d(TAG, getClass().getSimpleName() + ".onDetach...");
     }
 
     public abstract void initInjector();
