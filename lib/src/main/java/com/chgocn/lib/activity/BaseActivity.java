@@ -88,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Lifecycl
             ActionBar actionBar = getSupportActionBar();
             if (null != actionBar) {
                 actionBar.setDisplayHomeAsUpEnabled(showHomeAsUp);
+                actionBar.setTitle("");//do not display actionBar title default.Because we custom it.
             }
             toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         }

@@ -13,4 +13,9 @@
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
 
     </style>
+
+    <style name="AppTheme.Primary" parent="@style/AppTheme">
+        <item name="android:windowBackground">@color/win_bg</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>
