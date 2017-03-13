@@ -7,13 +7,31 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.0'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+        //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+ext {
+    compileSdkVersion = 24
+    buildToolsVersion = "25.0.1"
+
+    // defaultConfig
+    minSdkVersion = 18
+    targetSdkVersion = 25
+
+    // compileOptions
+    //fuck google,jdk 1.8 can't support multi dex.
+
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    //add support
+    supportVersion = "25.2.0"
 }
 
 allprojects {

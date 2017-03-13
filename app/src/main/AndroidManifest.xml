@@ -15,23 +15,23 @@
         android:allowClearUserData="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".personal.info.PersonalInfoEditActivity" />
+            android:name=".ui.personal.info.PersonalInfoEditActivity" />
         <activity
-            android:name=".WebActivity">
+            android:name=".ui.WebActivity">
             <intent-filter>
                 <action android:name="com.chgocn.gankio.mvp.WEB" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".PhotoGestureActivity">
+            android:name=".ui.PhotoGestureActivity">
             <intent-filter>
                 <action android:name="com.chgocn.gankio.mvp.PHOTO_GESTURE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.MainActivity">
+            android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

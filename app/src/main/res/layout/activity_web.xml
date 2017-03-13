@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.chgocn.gankio.mvp.WebActivity">
+    tools:context="com.chgocn.gankio.mvp.ui.WebActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -34,7 +34,7 @@
         android:background="@android:color/transparent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.chgocn.gankio.mvp.view.ProgressWebView
+        <com.chgocn.gankio.mvp.ui.ProgressWebView
             android:id="@+id/web_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
