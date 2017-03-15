@@ -7,4 +7,7 @@
     <string name="welfare">福利</string>
     <string name="ios">ios</string>
     <string name="title">标题</string>
+    <string name="share">分享</string>
+    <string name="like">喜欢</string>
+    <string name="store">收藏</string>
 </resources>

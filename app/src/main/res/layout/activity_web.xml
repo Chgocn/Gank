@@ -21,8 +21,8 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/AppTheme.ActionBar"
-            app:popupTheme="@style/ActionBar_Pop_Theme"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ActionBar_Pop_Theme">
 
         </android.support.v7.widget.Toolbar>
 
@@ -41,33 +41,53 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.chgocn.gankio.mvp.ui.AppBarDependBehavior">
 
-        <ImageButton
-            android:id="@+id/ib1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+        <ImageView
+            android:id="@+id/shadow"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:src="@drawable/shadow" />
 
-        <ImageButton
-            android:id="@+id/ib2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+        <LinearLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/shadow"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ib3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:id="@+id/share"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@color/primary"
+                android:text="@string/share" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/like"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/primary_light"
+                android:text="@string/like" />
+
+            <TextView
+                android:id="@+id/store"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/btn_red_normal"
+                android:text="@string/store" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

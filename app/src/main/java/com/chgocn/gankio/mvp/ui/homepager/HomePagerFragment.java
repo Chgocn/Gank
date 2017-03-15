@@ -10,11 +10,12 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.chgocn.gankio.mvp.injector.module.HomePagerModule;
-import com.chgocn.gankio.mvp.ui.PhotoGestureActivity;
 import com.chgocn.gankio.mvp.R;
-import com.chgocn.gankio.mvp.ui.WebActivity;
+import com.chgocn.gankio.mvp.injector.component.DaggerHomePagerComponent;
+import com.chgocn.gankio.mvp.injector.module.HomePagerModule;
 import com.chgocn.gankio.mvp.model.Gank;
+import com.chgocn.gankio.mvp.ui.PhotoGestureActivity;
+import com.chgocn.gankio.mvp.ui.WebActivity;
 import com.chgocn.lib.fragment.BaseFragment;
 import com.chgocn.lib.presenter.Presenter;
 

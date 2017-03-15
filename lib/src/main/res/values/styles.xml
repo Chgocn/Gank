@@ -61,6 +61,11 @@
 
     <style name="ListSubtitleText" parent="SubtitleText" />
 
+    <style name="ButtonText" parent="SubtitleText" >
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <!--list-->
     <style name="ListView">
         <item name="android:dividerHeight">0dp</item>

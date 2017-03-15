@@ -6,8 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.chgocn.gankio.mvp.injector.module.ApplicationModule;
 import com.chgocn.gankio.mvp.R;
+import com.chgocn.gankio.mvp.injector.component.DaggerExploreComponent;
+import com.chgocn.gankio.mvp.injector.module.ApplicationModule;
 import com.chgocn.gankio.mvp.injector.module.ExploreModule;
 import com.chgocn.gankio.mvp.model.Gank;
 import com.chgocn.lib.fragment.DialogFragment;
