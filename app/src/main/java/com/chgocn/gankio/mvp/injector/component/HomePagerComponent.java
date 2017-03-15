@@ -1,4 +1,7 @@
-package com.chgocn.gankio.mvp.ui.homepager;
+package com.chgocn.gankio.mvp.injector.component;
+
+import com.chgocn.gankio.mvp.ui.homepager.HomePagerFragment;
+import com.chgocn.gankio.mvp.injector.module.HomePagerModule;
 
 import dagger.Component;
 

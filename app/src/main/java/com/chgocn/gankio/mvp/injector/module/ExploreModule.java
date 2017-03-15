@@ -1,6 +1,8 @@
-package com.chgocn.gankio.mvp.ui.explore;
+package com.chgocn.gankio.mvp.injector.module;
 
 import com.chgocn.gankio.mvp.network.service.explore.ExploreService;
+import com.chgocn.gankio.mvp.ui.explore.ExploreCache;
+import com.chgocn.gankio.mvp.ui.explore.ExploreFragment;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,4 +1,4 @@
-package com.chgocn.gankio.mvp;
+package com.chgocn.gankio.mvp.injector.module;
 
 import android.content.Context;
 

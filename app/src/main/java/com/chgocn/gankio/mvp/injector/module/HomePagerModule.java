@@ -1,6 +1,8 @@
-package com.chgocn.gankio.mvp.ui.homepager;
+package com.chgocn.gankio.mvp.injector.module;
 
 import com.chgocn.gankio.mvp.network.service.home.HomePagerService;
+import com.chgocn.gankio.mvp.ui.homepager.HomePagerCache;
+import com.chgocn.gankio.mvp.ui.homepager.HomePagerFragment;
 
 import dagger.Module;
 import dagger.Provides;

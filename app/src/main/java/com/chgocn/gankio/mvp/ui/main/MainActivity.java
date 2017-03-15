@@ -7,30 +7,27 @@ import com.chgocn.gankio.mvp.R;
 import com.chgocn.lib.activity.TabPagerActivity;
 import com.chgocn.lib.presenter.Presenter;
 
-import javax.inject.Inject;
-
 /**
  * Created by chgocn.
  */
-public class MainActivity extends TabPagerActivity<MainFragmentAdapter> implements HomePresenter.View {
-
-    @Inject
-    public HomePresenter presenter;
-
-    private int currentPosition = 1;
+public class MainActivity extends TabPagerActivity<MainFragmentAdapter> {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.create();
         configureTabPager();
         int defaultPosition = 0;
         onPageSelected(defaultPosition);
     }
 
     @Override
+    public Presenter getPresenter() {
+        return null;
+    }
+
+    @Override
     public void initInjector() {
-        DaggerMainComponent.builder().mainModule(new MainModule()).build().inject(this);
+
     }
 
     @Override
@@ -60,7 +57,6 @@ public class MainActivity extends TabPagerActivity<MainFragmentAdapter> implemen
     @Override
     protected void setCurrentItem(int position) {
         super.setCurrentItem(position);
-        currentPosition = position;
         switch (position) {
             case 0:
                 toolbar.setVisibility(View.GONE);
@@ -81,10 +77,5 @@ public class MainActivity extends TabPagerActivity<MainFragmentAdapter> implemen
     @Override
     public int getContentView() {
         return R.layout.activity_main;
-    }
-
-    @Override
-    public Presenter getPresenter() {
-        return presenter;
     }
 }
