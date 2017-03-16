@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.personal.PersonalFragment">
+    android:orientation="vertical">
 
-    <include layout="@layout/item_header_banner" />
-
-    <RelativeLayout
-        android:id="@+id/rl_avatar"
-        style="@style/ListItem">
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/title"
-            style="@style/ListTitleText"
-            android:layout_toEndOf="@+id/avatar"
-            android:layout_toRightOf="@+id/avatar"
-            android:text="chgocn" />
-
-        <TextView
-            style="@style/ListSubtitleText"
-            android:layout_alignBottom="@+id/avatar"
-            android:layout_toEndOf="@+id/avatar"
-            android:layout_toRightOf="@+id/avatar"
-            android:text="公司" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"/>
 
-</LinearLayout>
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.ActionBar"
+            android:layout_alignParentTop="true"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:id="@+id/toolbar" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:layout_below="@id/toolbar"
+            android:id="@+id/sliding_tabs_layout"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabMode="fixed"
+            android:background="@color/primary"
+            android:layout_width="match_parent"
+            android:layout_height="56dp" />
+        <!--todo replace the tabLayout height whit android:layout_height="wrap_content"-->
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.chgocn.lib.view.ViewPager
+        android:id="@+id/vp_pages"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/ListSpinner"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</android.support.design.widget.CoordinatorLayout>
 

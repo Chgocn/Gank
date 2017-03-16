@@ -25,8 +25,7 @@ public class HomeFragment extends TabPagerFragment<HomePagerAdapter> implements 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        configureTabPager();
-        pager.setOffscreenPageLimit(5);
+
     }
 
     @Override
@@ -36,7 +35,8 @@ public class HomeFragment extends TabPagerFragment<HomePagerAdapter> implements 
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
+        configureTabPager();
+        pager.setOffscreenPageLimit(5);
     }
 
     @Override

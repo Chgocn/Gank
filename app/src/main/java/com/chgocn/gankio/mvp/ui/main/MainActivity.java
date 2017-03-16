@@ -66,7 +66,7 @@ public class MainActivity extends TabPagerActivity<MainFragmentAdapter> {
                 setTitle("Explore");
                 break;
             case 2:
-                toolbar.setVisibility(View.VISIBLE);
+                toolbar.setVisibility(View.GONE);
                 setTitle("Personal");
                 break;
             default:

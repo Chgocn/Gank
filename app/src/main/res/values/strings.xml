@@ -10,4 +10,6 @@
     <string name="share">分享</string>
     <string name="like">喜欢</string>
     <string name="store">收藏</string>
+    <string name="personal_page">个人主页</string>
+    <string name="personal_detail">详情信息</string>
 </resources>
