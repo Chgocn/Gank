@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.chgocn.gankio.mvp.R;
 import com.chgocn.lib.fragment.TabPagerFragment;
 import com.chgocn.lib.presenter.Presenter;
+import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,8 @@ public class PersonalFragment extends TabPagerFragment<PersonalPagerAdapter> imp
     @BindView(R.id.banner)
     ImageView banner;
 
+    private int[] bannerResIds= new int[]{R.drawable.ic_live_rewards_bg_1,R.drawable.ic_live_rewards_bg_2};
+
     @Override
     public void initInjector() {
 
@@ -38,11 +41,11 @@ public class PersonalFragment extends TabPagerFragment<PersonalPagerAdapter> imp
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        configureTabPager();
         slidingTabsLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                banner.setImageDrawable(getResources().getDrawable(R.drawable.spinner_inner));
+                Logger.e("TAG",tab.getPosition());
+                banner.setImageResource(bannerResIds[tab.getPosition()]);
             }
 
             @Override
@@ -55,6 +58,7 @@ public class PersonalFragment extends TabPagerFragment<PersonalPagerAdapter> imp
 
             }
         });
+        configureTabPager();
     }
 
     @Override
